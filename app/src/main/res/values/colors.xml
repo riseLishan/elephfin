@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="text_white">#ffffff</color>
+    <color name="text_black">#000000</color>
+    <color name="text_red">#F44D59</color>
+    <color name="text_hui">#efeeee</color>
+    <color name="text_red1">#f54c58</color>
+    <color name="white_gray">#EEEEEE</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- 布局的背景色 -->
+    <color name="layout_bg">#ffffff</color>
+    <color name="layout_bg_alpha">#330F1418</color>
+    <color name="text_bg">#060606</color>
+    <color name="green">#53CB97</color>
+
+    <color name="line_bg">#060606</color>
+    <color name="all_k_color">#00B6DF</color>
+    <color name="all_blue_color_pressd">#990066CC</color>
+    <color name="thinkive_ma_5">#E34AAD</color>
+    <color name="thinkive_ma_10">#E7B231</color>
+    <color name="thinkive_ma_20">#249CE1</color>
+
+</resources>

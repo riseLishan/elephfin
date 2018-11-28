@@ -1,0 +1,152 @@
+
+<script>
+   function request(strParame) {
+   var args = new Object( );
+   var query = location.search.substring(1);
+
+   var pairs = query.split("&"); // Break at ampersand
+   for(var i = 0; i < pairs.length; i++) {
+   var pos = pairs[i].indexOf('=');
+   if (pos == -1) continue;
+   var argname = pairs[i].substring(0,pos);
+   var value = pairs[i].substring(pos+1);
+   value = decodeURIComponent(value);
+   args[argname] = value;
+}
+return args[strParame];
+}
+</script>
+
+
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>
+        js调用java
+    </title>
+</head>
+
+<body>
+<p>
+    <xmp id="show">
+    </xmp>
+</p>
+<p>
+    <xmp id="init">
+    </xmp>
+</p>
+<p>
+    <input type="text" id="text1" value="用户名(username)" />
+</p>
+<p>
+    <input type="text" id="text2" value="password" />
+</p>
+<p>
+    <input type="button" id="enter" value="发消息给Native" onclick="testClick();"
+    />
+</p>
+<p>
+    <input type="button" id="enter1" value="充值" onclick="testClick1();"
+    />
+</p>
+<p>
+    <input type="button" id="enter2" value="显示html" onclick="testDiv();" />
+</p>
+<p>
+    <input type="file" value="打开文件" />
+</p>
+</body>
+<script>
+        function testDiv() {
+            document.getElementById("show").innerHTML = document.getElementsByTagName("html")[0].innerHTML;
+        }
+
+        <!--发消息给Native-->
+        function testClick() {
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+
+            //send message to native
+            var data = {id: 1, content: "这是一个图片 <img src=\"a.png\"/> test\r\nhahaha"};
+            window.WebViewJavascriptBridge.send(
+                data
+                , function(responseData) {
+                    document.getElementById("show").innerHTML = "发消息给Native, 返回 = " + responseData
+                }
+            );
+
+        }
+
+        <!-- 调用Native方法 -->
+        <!--
+        function testClick1() {
+            var str1 = document.getElementById("text1").value;
+            var str2 = document.getElementById("text2").value;
+
+            //call native method
+            window.WebViewJavascriptBridge.callHandler(
+                'submitFromWeb'
+                , {'param': '中文测试'}
+                , function(responseData) {
+                    document.getElementById("show").innerHTML = "调用Native方法, 返回 = " + responseData
+                }
+            );
+        }
+        -->
+        <!-- 调用APP来充值-->
+        function testClick1() {
+            <!--调用APP支付-->
+            alert(request("TestParam"));
+            window.Pay.PayByApp()
+        }
+
+        /*This function is invoked by the activity */
+        function AppPayProcess(payAmount,orderNo,payOrderId) {
+              alert(request("TestParam"));
+              <!--这里处理APP支付完成以后的处理-->
+              alert(orderNo);
+              alert(payOrderId);
+              alert(payAmount);
+              window.location.reload();
+          }
+
+
+
+        function bridgeLog(logContent) {
+            document.getElementById("show").innerHTML = logContent;
+        }
+
+        function connectWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
+        }
+
+        <!-- Native 调用JS -->
+        connectWebViewJavascriptBridge(function(bridge) {
+            bridge.init(function(message, responseCallback) {
+                console.log('JS got a message', message);
+                var data = {
+                    'Javascript Responds': '测试中文!'
+                };
+                console.log('JS responding with', data);
+                responseCallback(data);
+            });
+
+            bridge.registerHandler("functionInJs", function(data, responseCallback) {
+                document.getElementById("show").innerHTML = ("从native传来: = " + data);
+                var responseData = "Javascript Says Right back aka!";
+                responseCallback(responseData);
+            });
+        })
+    </script>
+
+</html>

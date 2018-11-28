@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fx.elephfin.activity.WeiXInSmFActivity">
+    <RelativeLayout
+        android:id="@+id/topbarBase"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/text_red1"
+        android:paddingRight="13dip" >
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_back"
+            android:scaleType="center" android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_centerInParent="true"
+            android:text="扫码支付界面" android:textColor="@color/white"
+            android:textSize="17sp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="130dp"
+            android:layout_height="130dp" android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/iv"
+            android:layout_centerHorizontal="true" android:text="请点击二维码保存图片或者手动截屏后进入微信识别付款"
+            android:layout_marginTop="15dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

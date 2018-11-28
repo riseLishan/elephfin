@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">金服小象</string>
+    <string-array name="datatype">
+        <item>沪深指数</item>
+        <item>纳斯达克</item>
+        <item>恒生指数</item>
+        <item>国际黄金</item>
+    </string-array>
+</resources>
